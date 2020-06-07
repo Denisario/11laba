@@ -13,7 +13,9 @@ import java.sql.SQLException;
 
 @WebServlet("/register")
 public class RegisterServlet  extends HttpServlet {
-    String err;
+    private String err;
+    private UserController userController;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("err", err);
@@ -22,7 +24,11 @@ public class RegisterServlet  extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init();
+        try {
+            this.userController=new UserController();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -32,14 +38,13 @@ public class RegisterServlet  extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserController userController= null;
         try {
             if(req.getParameter("login").equals("")||
                     req.getParameter("pass").equals("")||
                     req.getParameter("rpass").equals("")) throw new Exception("All fields are required");
             if(!req.getParameter("pass").equals(req.getParameter("rpass"))) throw new Exception("incorrect pass");
-            userController = new UserController();
-            userController.registerUser(req.getParameter("login"), req.getParameter("pass"));
+            this.userController = new UserController();
+            this.userController.registerUser(req.getParameter("login"), req.getParameter("pass"));
             resp.sendRedirect("/login.jsp");
         } catch (Exception e) {
             err=e.getMessage();

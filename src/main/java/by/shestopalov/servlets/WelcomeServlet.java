@@ -15,12 +15,21 @@ import java.util.ArrayList;
 
 @WebServlet("/welcome")
 public class WelcomeServlet extends HttpServlet {
+    private ProductController productController;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            this.productController=new ProductController();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            ProductController productController=new ProductController();
             ArrayList<Product> products=productController.getAllProducts();
-            System.out.println(products.size());
             req.setAttribute("products", products);
             getServletContext().getRequestDispatcher("/welcome.jsp").forward(req, resp);
         } catch (Exception e) {

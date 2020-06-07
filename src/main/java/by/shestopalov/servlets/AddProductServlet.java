@@ -18,26 +18,36 @@ import java.util.List;
 
 @WebServlet("/addProduct")
 public class AddProductServlet extends HttpServlet {
-    ProductController productController=null;
-    private ArrayList<ProductCategory> productCategories=null;
+    private ProductController productController;
+    private ArrayList<ProductCategory> productCategories;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            this.productController= new ProductController();
+            this.productCategories=new ArrayList<>();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            productCategories=productController.getAllCategories();
-            req.setAttribute("categories", productCategories);
+            this.productCategories=productController.getAllCategories();
+            req.setAttribute("categories", this.productCategories);
+            getServletContext().getRequestDispatcher("/addProduct.jsp").forward(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        getServletContext().getRequestDispatcher("/addProduct.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long id=productCategories.stream().filter(c->req.getParameter("category").equals(c.getName())).findAny().orElse(null).getId();
+        long id=this.productCategories.stream().filter(c->req.getParameter("category").equals(c.getName())).findAny().orElse(null).getId();
         try {
             System.out.println(id);
-            productController.addProduct(req.getParameter("name"),
+            this.productController.addProduct(req.getParameter("name"),
                                         id,
                                         Integer.parseInt(req.getParameter("amount")),
                                         Integer.parseInt(req.getParameter("price")));
@@ -49,14 +59,5 @@ public class AddProductServlet extends HttpServlet {
     @Override
     public void destroy() {
         super.destroy();
-    }
-
-    @Override
-    public void init() throws ServletException {
-        try {
-            productController= new ProductController();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
