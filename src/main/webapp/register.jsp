@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="custom" uri="/WEB-INF/tld/tags.tld" %>
 <%--
   Created by IntelliJ IDEA.
   User: DENIS
@@ -13,11 +14,11 @@
 </head>
 <body>
     <p>${err}</p>
-    <form action="/register" method="POST">
+    <form action="<c:url value="/register" />" method="POST">
         <input type="text" name="login" placeholder="login">
         <input type="password" name="pass" placeholder="password">
         <input type="password" name="rpass" placeholder="repeat password">
-        <input type="submit">
+        <custom:sdaSubmit value="Register"/>
     </form>
 </body>
 </html>

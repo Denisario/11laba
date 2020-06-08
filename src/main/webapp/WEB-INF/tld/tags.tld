@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1">
+    <tlib-version>1.0</tlib-version>
+    <short-name>customtags</short-name>
+    <uri>customtags</uri>
+    <tag>
+        <name>sdaLabledTextField</name>
+        <tag-class>by.shestopalov.customtags.sdaLabledTextField</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>label</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>value</name>
+            <required>false</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>sdaSubmit</name>
+        <tag-class>by.shestopalov.customtags.sdaSubmit</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>sdaTable</name>
+        <tag-class>by.shestopalov.customtags.sdaTable</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>products</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

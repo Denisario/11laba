@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/editProduct" method="POST">
+<form action="<c:url value="/editProduct" />" method="POST">
     <input type="text" name="name" placeholder="name">
     <br/>
     <select name="category" id="">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: DENIS
@@ -9,7 +10,7 @@
 <html>
 <body>
     <header>
-        <a href="welcome.jsp">Home</a>
+        <a href="<c:url value="/welcome" />">Home</a>
     </header>
 </body>
 </html>

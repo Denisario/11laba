@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="custom" uri="/WEB-INF/tld/tags.tld" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: DENIS
@@ -12,10 +15,12 @@
 </head>
 <body>
 <p>${err}</p>
-<form action="/login" method="POST">
-    <input type="text" name="login" placeholder="login">
+<form action="<c:url value="/login"/>" method="POST">
+    <custom:sdaLabledTextField label="login" name="login"></custom:sdaLabledTextField>
+    <br/>
     <input type="password" name="pass" placeholder="password">
-    <input type="submit">
+    <br/>
+    <custom:sdaSubmit value="Login"/>
 </form>
 </body>
 </html>
